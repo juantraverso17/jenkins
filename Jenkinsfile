@@ -1,17 +1,17 @@
 pipeline {
   agent any
   stages {
-    stage('Echo') {
+    stage('pwd') {
       steps {
         sh '''#!/bin/bash
 
-echo "hola $name" >> /srv/docker/jenkinsfile.txt'''
+pwd'''
       }
     }
 
     stage('Fin') {
       steps {
-        echo 'Finalizó con exito'
+        echo 'FinalizÃ³ con exito'
       }
     }
 
