@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:20.10.0-alpine3.19' }
+    }
     environment {
         // Define la variable de versión con el formato requerido
         VERSION = "traversojm/nxtest:1.0.0-${env.GIT_COMMIT}"
