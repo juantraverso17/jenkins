@@ -13,6 +13,13 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Check Docker Version') {
+            steps {
+                script {
+                    sh 'docker --version'
+                }
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
