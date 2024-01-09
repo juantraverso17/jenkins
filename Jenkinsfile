@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:16-alpine'}
+    }
 
     environment {
         // Define la variable de versión con el formato requerido
