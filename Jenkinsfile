@@ -1,6 +1,9 @@
 pipeline {
     agent {
-        docker
+        docker {
+            image 'docker:latest'  // Utiliza la imagen Docker oficial
+            args '-v /var/run/docker.sock:/var/run/docker.sock'  // Monta el socket Docker para permitir la ejecución de Docker dentro del contenedor
+        }
     }
 
     environment {
