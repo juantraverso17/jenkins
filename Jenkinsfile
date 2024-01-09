@@ -15,7 +15,7 @@ pipeline {
         stage('Check Docker Version') {
             agent {
                 docker {
-                    label 'image'  // El agente se ejecutará en nodos con el tag 'image'
+                    label 'docker'  // El agente se ejecutará en nodos con el tag 'image'
                 }
             }
             steps {
@@ -28,7 +28,7 @@ pipeline {
         stage('Build Docker Image') {
             agent {
                 docker {
-                    label 'image'  // El agente se ejecutará en nodos con el tag 'image'
+                    label 'docker'  // El agente se ejecutará en nodos con el tag 'image'
                 }
             }
             steps {
@@ -42,7 +42,7 @@ pipeline {
         stage('Push Docker Image') {
             agent {
                 docker {
-                    label 'image'  // El agente se ejecutará en nodos con el tag 'image'
+                    label 'docker'  // El agente se ejecutará en nodos con el tag 'image'
                 }
             }
             steps {
