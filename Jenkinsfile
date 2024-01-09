@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        docker { image 'node:20.10.0-alpine3.19' }
-    }
+    agent any
     environment {
         // Define la variable de versión con el formato requerido
         VERSION = "traversojm/nxtest:1.0.0-${env.GIT_COMMIT}"
@@ -15,6 +13,11 @@ pipeline {
             }
         }
         stage('Check Docker Version') {
+            agent {
+                docker {
+                    label 'image'  // El agente se ejecutará en nodos con el tag 'image'
+                }
+            }
             steps {
                 script {
                     sh 'docker --version'
@@ -23,6 +26,11 @@ pipeline {
         }
 
         stage('Build Docker Image') {
+            agent {
+                docker {
+                    label 'image'  // El agente se ejecutará en nodos con el tag 'image'
+                }
+            }
             steps {
                 script {
                     // Construye la imagen de Docker y la etiqueta con la versión
@@ -32,6 +40,11 @@ pipeline {
         }
 
         stage('Push Docker Image') {
+            agent {
+                docker {
+                    label 'image'  // El agente se ejecutará en nodos con el tag 'image'
+                }
+            }
             steps {
                 script {
                     // Utiliza las credenciales de Docker Hub almacenadas en Jenkins
