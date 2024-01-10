@@ -4,9 +4,16 @@ pipeline {
             label 'docker'
         }
     }
+
     environment {
+        // Obtiene el commit completo
+        FULL_COMMIT = env.GIT_COMMIT
+
+        // Toma solo los últimos 4 dígitos del commit
+        SHORT_COMMIT = FULL_COMMIT.takeRight(4)
+
         // Define la variable de versión con el formato requerido
-        VERSION = "traversojm/nxtest:1.0.0-${env.GIT_COMMIT}"
+        VERSION = "traversojm/nxtest:1.0.0-${SHORT_COMMIT}"
     }
 
     stages {
