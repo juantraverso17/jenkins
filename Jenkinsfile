@@ -7,10 +7,10 @@ pipeline {
 
     environment {
         // Obtiene el commit completo
-        FULL_COMMIT = "${env.GIT_COMMIT}"
+        FULL_COMMIT = env.GIT_COMMIT
 
         // Toma solo los últimos 4 dígitos del commit
-        SHORT_COMMIT = FULL_COMMIT.takeRight(4)
+        SHORT_COMMIT = FULL_COMMIT.substring(FULL_COMMIT.length() - 4)
 
         // Define la variable de versión con el formato requerido
         VERSION = "traversojm/nxtest:1.0.0-${SHORT_COMMIT}"
