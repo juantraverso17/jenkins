@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         // Obtiene el commit completo
-        FULL_COMMIT = env.GIT_COMMIT
+        FULL_COMMIT = "${env.GIT_COMMIT}"
 
         // Toma solo los últimos 4 dígitos del commit
         SHORT_COMMIT = FULL_COMMIT.takeRight(4)
