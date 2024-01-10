@@ -7,7 +7,8 @@ pipeline {
 
     environment {
         // Define la variable de versión con el formato requerido
-        VERSION = "traversojm/nxtest:1.0.0-${GIT_COMMIT,length=4}"
+        GIT_ASD = GIT_COMMIT.take(4)
+        VERSION = "traversojm/nxtest:1.0.0-${GIT_ASD}"
     }
 
     stages {
