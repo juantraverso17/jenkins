@@ -22,6 +22,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker --version'
+                    echo "El valor de GIT_ASD es: ${GIT_ASD}"
                 }
             }
         }
