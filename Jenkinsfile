@@ -1,5 +1,9 @@
 pipeline {
-    agent debian
+    agent {
+        node {
+            label 'docker'
+        }
+    }
     environment {
         // Define la variable de versión con el formato requerido
         VERSION = "traversojm/nxtest:1.0.0-${env.GIT_COMMIT}"
