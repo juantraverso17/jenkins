@@ -6,11 +6,8 @@ pipeline {
     }
 
     environment {
-        // Obtiene el commit completo
-        FULL_COMMIT = env.GIT_COMMIT
-
         // Define la variable de versión con el formato requerido
-        VERSION = "traversojm/nxtest:1.0.0-${FULL_COMMIT}"
+        VERSION = "traversojm/nxtest:1.0.0-${GIT_COMMIT}"
     }
 
     stages {
