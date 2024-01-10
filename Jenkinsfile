@@ -9,6 +9,8 @@ pipeline {
         // Define la variable de versión con el formato requerido
         GIT_ASD = GIT_COMMIT.take(4)
         VERSION = "traversojm/nxtest:1.0.0-${GIT_ASD}"
+        DOCKER_HUB_REGISTRY = 'docker.io'
+        DOCKER_CREDENTIALS_ID = 'cf534e82-dca1-4026-b044-6453d84c6437' // Reemplaza con el ID de tus credenciales en Jenkins
     }
 
     stages {
@@ -36,16 +38,16 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
+        stage('Construir y Publicar Imagen') {
             steps {
                 script {
-                    // Utiliza las credenciales de Docker Hub almacenadas en Jenkins
-                    withCredentials([dockerRegistry(credentialsId: 'cf534e82-dca1-4026-b044-6453d84c6437', url: 'https://index.docker.io/v1/')]) {
-                        // Publica la imagen en Docker Hub
-                        docker.withRegistry('https://index.docker.io/v1/', 'cf534e82-dca1-4026-b044-6453d84c6437') {
-                            docker.image(env.VERSION).push()
-                        }
+                    // Autenticarse en Docker Hub utilizando las credenciales de Jenkins
+                    withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                        sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ${DOCKER_HUB_REGISTRY}"
                     }
+
+                    // Subir la imagen a Docker Hub
+                    sh "docker push ${VERSION}"
                 }
             }
         }
