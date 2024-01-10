@@ -13,11 +13,6 @@ pipeline {
             }
         }
         stage('Check Docker Version') {
-            agent {
-                docker {
-                    label 'docker'  // El agente se ejecutará en nodos con el tag 'image'
-                }
-            }
             steps {
                 script {
                     sh 'docker --version'
@@ -26,11 +21,6 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-            agent {
-                docker {
-                    label 'docker'  // El agente se ejecutará en nodos con el tag 'image'
-                }
-            }
             steps {
                 script {
                     // Construye la imagen de Docker y la etiqueta con la versión
@@ -40,11 +30,6 @@ pipeline {
         }
 
         stage('Push Docker Image') {
-            agent {
-                docker {
-                    label 'docker'  // El agente se ejecutará en nodos con el tag 'image'
-                }
-            }
             steps {
                 script {
                     // Utiliza las credenciales de Docker Hub almacenadas en Jenkins
