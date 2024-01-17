@@ -55,7 +55,7 @@ pipeline {
         stage('Docker Image Scan') {
             steps {
                 script {
-                    sh "trivy image ${VERSION} > /home/jtraverso/report-${VERSION}.txt" 
+                    sh "trivy image ${VERSION} > /home/jtraverso/report-nxtest:1.0.0-${GIT_ASD}.txt" 
                 }
             }
         }
