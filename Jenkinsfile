@@ -38,7 +38,7 @@ pipeline {
             }
         }
 
-        stage('Construir y Publicar Imagen') {
+        stage('Push Imagen to Dockerhub') {
             steps {
                 script {
                     // Autenticarse en Docker Hub utilizando las credenciales de Jenkins
@@ -48,6 +48,14 @@ pipeline {
 
                     // Subir la imagen a Docker Hub
                     sh "docker push ${VERSION}"
+                }
+            }
+        }
+        
+        stage('Docker Image Scan') {
+            steps {
+                script {
+                    sh "trivy image ${VERSION} > /home/jtraverso/report-${VERSION}.txt" 
                 }
             }
         }
